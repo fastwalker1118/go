@@ -1,0 +1,77 @@
+% neurips_2024.sty - Style file for NeurIPS 2024
+% Simplified version based on the official NeurIPS style
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{neurips_2024}[2024/01/01 NeurIPS 2024 style file]
+
+% Options
+\newif\if@final\@finalfalse
+\newif\if@nonatbib\@nonatbibfalse
+\DeclareOption{final}{\@finaltrue}
+\DeclareOption{nonatbib}{\@nonatbibtrue}
+\DeclareOption*{\PackageWarning{neurips_2024}{Unknown option `\CurrentOption'}}
+\ProcessOptions\relax
+
+% Page layout
+\usepackage[verbose=true,letterpaper]{geometry}
+\AtBeginDocument{
+  \newgeometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+  }
+}
+
+% Font
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\sfdefault}{phv}
+
+% Sections
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+  {-2.0ex \@plus -0.5ex \@minus -0.2ex}%
+  {1.5ex \@plus 0.3ex \@minus 0.2ex}%
+  {\large\bf\raggedright}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+  {-1.8ex \@plus -0.5ex \@minus -0.2ex}%
+  {0.8ex \@plus 0.2ex}%
+  {\normalsize\bf\raggedright}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+  {-1.5ex \@plus -0.5ex \@minus -0.2ex}%
+  {0.5ex \@plus 0.2ex}%
+  {\normalsize\bf\raggedright}}
+
+% Paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5.5pt plus 1pt minus 1pt}
+
+% Title
+\renewcommand{\maketitle}{%
+  \par
+  \begingroup
+  \renewcommand{\thefootnote}{\fnsymbol{footnote}}%
+  \@maketitle
+  \endgroup
+  \setcounter{footnote}{0}%
+}
+
+\renewcommand{\@maketitle}{%
+  \vbox to 0pt{}%
+  \vskip 0.2in
+  \begin{center}%
+    {\LARGE\bf \@title \par}%
+    \vskip 0.3in
+    {\large \@author \par}%
+  \end{center}%
+  \vskip 0.3in
+}
+
+% Abstract
+\renewenvironment{abstract}%
+  {\vskip 0.075in\centerline{\large\bf Abstract}\vspace{0.5ex}\begin{quote}}%
+  {\par\end{quote}\vskip 1ex}
+
+% Footnotes
+\renewcommand{\footnoterule}{\kern-3pt \hrule width 0.4\columnwidth \kern 2.6pt}
